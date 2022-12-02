@@ -1,4 +1,5 @@
 #define CLEAR_NEWLINES { while(getchar()!='\n'); }
+#define FORCED_CHAR 'z'
 
 #include <stdio.h>
 
@@ -6,12 +7,12 @@ void doPrint(int times, char letter) {
     for(int i=0; i<(times<10?times:0); ++i) {
         printf("%c", letter);
     }
-    letter='z'; // no effect
+    letter=FORCED_CHAR; // no effect
 }
 
 void doSideEffectPrint(int times, char* letter) {
     doPrint(times, *letter);
-    *letter='z';
+    *letter=FORCED_CHAR;
 }
 
 
@@ -27,8 +28,8 @@ void main()
     scanf("%c", &letter); CLEAR_NEWLINES;
     
     doPrint(times, letter);
-    printf("\nprobably not z: %c\n", letter);
+    printf("\nprobably not %c: %c\n", FORCED_CHAR, letter);
     
     doSideEffectPrint(times, &letter);
-    printf("\ndefinitely z: %c", letter);
+    printf("\ndefinitely %c: %c", FORCED_CHAR, letter);
 }
